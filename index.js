@@ -14,11 +14,11 @@ let writes = [
   `services/${name}Services.js`
 ];
 let reads = [
-  `/Users/ldt1997/Desktop/ldt-my-utils/src/pages/demo/index.js`,
-  "/Users/ldt1997/Desktop/ldt-my-utils/src/pages/demo/Page.jsx",
-  `/Users/ldt1997/Desktop/ldt-my-utils/src/pages/demo/Page.less`,
-  `/Users/ldt1997/Desktop/ldt-my-utils/src/pages/demo/models/model.js`,
-  `/Users/ldt1997/Desktop/ldt-my-utils/src/pages/demo/services/services.js`
+  `${__dirname}/src/pages/demo/index.js`,
+  `${__dirname}/src/pages/demo/Page.jsx`,
+  `${__dirname}/src/pages/demo/Page.less`,
+  `${__dirname}/src/pages/demo/models/model.js`,
+  `${__dirname}/src/pages/demo/services/services.js`
 ];
 let file = [];
 let author = require("os")
@@ -47,14 +47,16 @@ let mkdir = function(a) {
       basepath = `${basepath}${a}/`;
       res(basepath);
     });
-  }).then(() => {
-    fs.mkdir(`${basepath}models`, err => {
-      if (err) console.log(err);
-    });
-    fs.mkdir(`${basepath}services`, err => {
-      if (err) console.log(err);
-    });
-  });
+  })
+    .then(() => {
+      fs.mkdir(`${basepath}models`, err => {
+        if (err) console.log(err);
+      });
+      fs.mkdir(`${basepath}services`, err => {
+        if (err) console.log(err);
+      });
+    })
+    .catch(err => console.log(err));
 };
 //读取模板文件内容，并替换为目标组件
 let readFile = function() {
