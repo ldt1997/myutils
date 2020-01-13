@@ -2,7 +2,7 @@
 
 import fs from "fs";
 import moment from "moment";
-import { dirname } from "path";
+import os from "os";
 
 let basepath = "src/pages/";
 let cptName = process.argv.splice(2)[0];
@@ -23,14 +23,14 @@ let reads = [
   `${__dirname}/../src/pages/demo/services/services.js`
 ];
 let file = [];
-let author = require("os")
+let author = os
   .homedir()
   .split("\\")
   .pop();
 
 //检测是否存在文件夹
 let exists = function() {
-  return new Promise((res, rej) => {
+  return new Promise(res => {
     (async function() {
       for (let a of path) {
         fs.existsSync(basepath + a)
