@@ -22,7 +22,7 @@ var author = require("os").homedir().split("\\").pop();
 
 //检测是否存在文件夹
 var exists = function exists() {
-  return new Promise(function (res, rej) {
+  return new Promise(function (res) {
     (async function () {
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;

@@ -3,6 +3,7 @@
 import fs from "fs";
 import moment from "moment";
 import os from "os";
+import color from "colors-cli";
 
 let basepath = "src/pages/";
 let cptName = process.argv.splice(2)[0];
@@ -37,10 +38,12 @@ let exists = function() {
           ? (basepath = `${basepath}${a}/`)
           : await mkdir(a);
       }
+      console.log(color.cyan_bt("√ 匹配路径成功"));
       res(basepath);
     })();
   });
 };
+
 //建立文件夹
 let mkdir = function(a) {
   return new Promise((res, rej) => {
@@ -83,6 +86,7 @@ let writeFile = function(file) {
           if (err) rej(err);
         });
       }
+      console.log(color.cyan_bt("√ 生成文件成功"));
       res("succ");
     })();
   });
@@ -92,7 +96,7 @@ async function creatPage() {
     await exists();
     await readFile();
     await writeFile(await readFile());
-    return console.log(`Successfully created ${name} page`);
+    return console.log(color.green(`√ Successfully created ${name} page`));
   } catch (err) {
     console.error(err);
   }

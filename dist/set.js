@@ -9,7 +9,13 @@ var _moment = require("moment");
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _path = require("path");
+var _os = require("os");
+
+var _os2 = _interopRequireDefault(_os);
+
+var _colorsCli = require("colors-cli");
+
+var _colorsCli2 = _interopRequireDefault(_colorsCli);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20,11 +26,11 @@ var name = path[path.length - 1];
 var writes = ["index.js", "Page.jsx", "Page.less", "models/" + name + "Model.js", "services/" + name + "Services.js"];
 var reads = [__dirname + "/../src/pages/demo/index.js", __dirname + "/../src/pages/demo/Page.jsx", __dirname + "/../src/pages/demo/Page.less", __dirname + "/../src/pages/demo/models/model.js", __dirname + "/../src/pages/demo/services/services.js"];
 var file = [];
-var author = require("os").homedir().split("\\").pop();
+var author = _os2.default.homedir().split("\\").pop();
 
 //检测是否存在文件夹
 var exists = function exists() {
-  return new Promise(function (res, rej) {
+  return new Promise(function (res) {
     (async function () {
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
@@ -51,10 +57,12 @@ var exists = function exists() {
         }
       }
 
+      console.log(_colorsCli2.default.cyan_bt("√ 匹配路径成功"));
       res(basepath);
     })();
   });
 };
+
 //建立文件夹
 var mkdir = function mkdir(a) {
   return new Promise(function (res, rej) {
@@ -104,6 +112,7 @@ var readFile = function readFile() {
       }
     }
 
+    console.log(_colorsCli2.default.cyan_bt("√ 读取模版文件成功"));
     res(file);
   });
 };
@@ -116,6 +125,7 @@ var writeFile = function writeFile(file) {
           if (err) rej(err);
         });
       }
+      console.log(_colorsCli2.default.cyan_bt("√ 生成文件成功"));
       res("succ");
     })();
   });
@@ -125,7 +135,7 @@ async function creatPage() {
     await exists();
     await readFile();
     await writeFile((await readFile()));
-    return console.log("Successfully created " + name + " page");
+    return console.log(_colorsCli2.default.green("\u221A Successfully created " + name + " page"));
   } catch (err) {
     console.error(err);
   }
